@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>生日</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        /* 竖屏手机：把原来的横屏视频旋转90度后铺满屏幕 */
+        .video-background {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100vh;
+            height: 100vw;
+            transform: translate(-50%, -50%) rotate(90deg);
+            transform-origin: center center;
+            object-fit: cover;
+            z-index: 0;
+            background: #000;
+        }
+
+        .content {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        #startButton {
+            position: fixed;
+            left: 50%;
+            bottom: 40px;
+            transform: translateX(-50%);
+            z-index: 10;
+            padding: 12px 24px;
+            border: 0;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 16px;
+        }
+
+        /* 横屏时恢复正常显示 */
+        @media (orientation: landscape) {
+            .video-background {
+                width: 100vw;
+                height: 100vh;
+                transform: translate(-50%, -50%);
+                object-fit: cover;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <video
+        id="birthdayVideo"
+        class="video-background"
+        autoplay
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        x5-playsinline
+        preload="auto">
+        <source src="birthday.mp4" type="video/mp4">
+    </video>
+
+    <audio id="music1" loop preload="auto">
+        <source src="https://music.163.com/song/media/outer/url?id=1963443271.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="startButton">点击播放</button>
+
+    <div class="content"></div>
+
+    <script>
+        (function () {
+            var video = document.getElementById('birthdayVideo');
+            var audio = document.getElementById('music1');
+            var button = document.getElementById('startButton');
+
+            function startMedia() {
+                video.muted = true;
+
+                var vp = video.play();
+                if (vp && vp.catch) vp.catch(function () {});
+
+                var ap = audio.play();
+                if (ap && ap.catch) ap.catch(function () {});
+
+                button.style.display = 'none';
+            }
+
+            video.addEventListener('error', function () {
+                button.textContent = '视频加载失败，请检查 birthday.mp4';
+                button.style.display = 'block';
+            });
+
+            button.addEventListener('click', startMedia);
+
+            var p = video.play();
+            if (p && p.catch) {
+                p.catch(function () {
+                    button.style.display = 'block';
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>
