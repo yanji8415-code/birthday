@@ -1,643 +1,643 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width,
-               initial-scale=1.0,
-               maximum-scale=1.0,
-               user-scalable=no">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<title>帆帆生日快乐 🎂</title>
+    <title>帆帆生日快乐</title>
 
-<style>
+    <style>
 
-/* =========================
-   基础设置
-========================= */
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #071a36;
-}
+        /* =========================
+           原来的视频设置，不改变视频
+        ========================= */
 
+        .video-background {
+            position: fixed;
 
-/* =========================
-   视频
-========================= */
+            top: 50%;
+            left: 50%;
 
-.video-background {
+            width: 100vh;
+            height: 100vw;
 
-    position: fixed;
+            transform:
+                translate(-50%, -50%)
+                rotate(90deg);
 
-    top: 0;
-    left: 0;
+            transform-origin: center center;
 
-    width: 100vw;
-    height: 100vh;
+            object-fit: cover;
 
-    object-fit: cover;
+            z-index: 0;
 
-    z-index: 0;
+            background: #000;
+        }
 
-    background: #071a36;
 
-    display: block;
-}
+        /* =========================
+           生日文字
+        ========================= */
 
+        #birthdayMessage {
 
-/* =========================
-   梦幻遮罩
-========================= */
+            position: fixed;
 
-.overlay {
+            top: 20%;
+            left: 50%;
 
-    position: fixed;
+            transform: translateX(-50%);
 
-    top: 0;
-    left: 0;
+            width: 90%;
 
-    width: 100%;
-    height: 100%;
+            text-align: center;
 
-    z-index: 1;
+            z-index: 5;
 
-    pointer-events: none;
+            pointer-events: none;
 
-    background:
-        radial-gradient(
-            circle at 50% 40%,
-            rgba(100,210,255,0.08),
-            rgba(0,20,60,0.18)
-        );
-}
+            transition:
+                opacity 1s ease,
+                transform 1s ease;
+        }
 
 
-/* =========================
-   星星
-========================= */
+        /* 帆帆 */
 
-.stars {
+        .name {
 
-    position: fixed;
+            font-family:
+                "STKaiti",
+                "KaiTi",
+                "Microsoft YaHei",
+                sans-serif;
 
-    top: 0;
-    left: 0;
+            font-size: 70px;
 
-    width: 100%;
-    height: 100%;
+            font-weight: 900;
 
-    z-index: 3;
+            font-style: italic;
 
-    pointer-events: none;
-}
+            color: #dff8ff;
 
-.star {
-
-    position: absolute;
+            letter-spacing: 12px;
 
-    color: white;
+            margin-bottom: 12px;
 
-    font-size: 22px;
+            text-shadow:
 
-    text-shadow:
-        0 0 5px white,
-        0 0 15px #9eeaff,
-        0 0 30px #66d8ff;
+                0 0 5px #ffffff,
 
-    animation:
-        twinkle 2s ease-in-out infinite;
-}
+                0 0 12px #d8f7ff,
 
+                0 0 25px #9ce8ff,
 
-.star:nth-child(1) {
-    top: 15%;
-    left: 15%;
-    font-size: 25px;
-}
+                0 0 45px #65d7ff,
 
-.star:nth-child(2) {
-    top: 25%;
-    right: 15%;
-    font-size: 30px;
-    animation-delay: .5s;
-}
+                0 0 70px #55cfff;
 
-.star:nth-child(3) {
-    top: 42%;
-    left: 8%;
-    font-size: 18px;
-    animation-delay: 1s;
-}
+            animation:
+                nameGlow 2s ease-in-out infinite;
+        }
 
-.star:nth-child(4) {
-    top: 48%;
-    right: 10%;
-    font-size: 25px;
-    animation-delay: 1.5s;
-}
 
-.star:nth-child(5) {
-    top: 65%;
-    left: 18%;
-    font-size: 20px;
-    animation-delay: .8s;
-}
+        /* 生日快乐 */
 
-.star:nth-child(6) {
-    top: 72%;
-    right: 18%;
-    font-size: 28px;
-    animation-delay: 1.2s;
-}
+        .birthday {
 
-.star:nth-child(7) {
-    top: 12%;
-    left: 50%;
-    font-size: 16px;
-    animation-delay: .3s;
-}
+            font-family:
+                "STKaiti",
+                "KaiTi",
+                "Microsoft YaHei",
+                sans-serif;
 
-.star:nth-child(8) {
-    top: 82%;
-    left: 50%;
-    font-size: 20px;
-    animation-delay: 1.7s;
-}
+            font-size: 45px;
 
+            font-weight: 900;
 
-@keyframes twinkle {
+            font-style: italic;
 
-    0%,
-    100% {
-        opacity: .25;
-        transform: scale(.7);
-    }
+            color: #d8f5ff;
 
-    50% {
-        opacity: 1;
-        transform: scale(1.4);
-    }
-}
+            letter-spacing: 8px;
 
+            text-shadow:
 
-/* =========================
-   生日文字
-========================= */
+                0 0 5px #ffffff,
 
-#birthdayMessage {
+                0 0 12px #c8f2ff,
 
-    position: fixed;
+                0 0 25px #80dcff,
 
-    top: 20%;
-    left: 50%;
+                0 0 45px #55cfff;
 
-    width: 90%;
+            animation:
+                birthdayGlow 2.5s ease-in-out infinite;
+        }
 
-    transform: translateX(-50%);
 
-    text-align: center;
+        /* =========================
+           帆帆发光动画
+        ========================= */
 
-    z-index: 5;
+        @keyframes nameGlow {
 
-    transition:
-        opacity .8s ease,
-        transform .8s ease;
-}
+            0%,
+            100% {
 
+                transform: scale(1);
 
-/* =========================
-   帆帆
-========================= */
+                text-shadow:
 
-.name {
+                    0 0 5px #ffffff,
 
-    font-family:
-        "STKaiti",
-        "KaiTi",
-        "Microsoft YaHei",
-        "PingFang SC",
-        sans-serif;
+                    0 0 12px #d8f7ff,
 
-    font-size: clamp(
-        60px,
-        16vw,
-        110px
-    );
+                    0 0 25px #9ce8ff,
 
-    font-weight: 900;
+                    0 0 45px #65d7ff;
+            }
 
-    font-style: italic;
+            50% {
 
-    color: #e3f8ff;
+                transform: scale(1.08);
 
-    letter-spacing: 10px;
+                text-shadow:
 
-    margin-bottom: 12px;
+                    0 0 8px #ffffff,
 
-    text-shadow:
-        0 0 5px white,
-        0 0 12px #d9f7ff,
-        0 0 25px #9de9ff,
-        0 0 45px #65d7ff,
-        0 0 70px #45c9ff;
+                    0 0 18px #eaffff,
 
-    animation:
-        nameGlow 2.2s ease-in-out infinite;
-}
+                    0 0 35px #9ce8ff,
 
+                    0 0 55px #55cfff,
 
-@keyframes nameGlow {
+                    0 0 75px #55cfff;
+            }
+        }
 
-    0%,
-    100% {
 
-        transform: scale(1);
+        /* =========================
+           生日快乐发光
+        ========================= */
 
-        text-shadow:
-            0 0 5px white,
-            0 0 12px #d9f7ff,
-            0 0 25px #9de9ff,
-            0 0 45px #65d7ff;
-    }
+        @keyframes birthdayGlow {
 
-    50% {
+            0%,
+            100% {
 
-        transform: scale(1.08);
+                opacity: 0.85;
 
-        text-shadow:
-            0 0 8px white,
-            0 0 18px #eaffff,
-            0 0 35px #9de9ff,
-            0 0 55px #65d7ff;
-    }
-}
+            }
 
+            50% {
 
-/* =========================
-   生日快乐
-========================= */
+                opacity: 1;
 
-.birthday {
+            }
+        }
 
-    font-family:
-        "STKaiti",
-        "KaiTi",
-        "Microsoft YaHei",
-        "PingFang SC",
-        sans-serif;
 
-    font-size: clamp(
-        40px,
-        10vw,
-        75px
-    );
+        /* =========================
+           星光
+        ========================= */
 
-    font-weight: 900;
+        .stars {
 
-    font-style: italic;
+            position: fixed;
 
-    color: #d9f6ff;
+            inset: 0;
 
-    letter-spacing: 7px;
+            z-index: 4;
 
-    text-shadow:
-        0 0 5px white,
-        0 0 12px #c4f1ff,
-        0 0 25px #80ddff,
-        0 0 40px #5bcaff;
+            pointer-events: none;
+        }
 
-    animation:
-        birthdayGlow 2.5s ease-in-out infinite;
-}
 
+        .star {
 
-@keyframes birthdayGlow {
+            position: absolute;
 
-    0%,
-    100% {
-        opacity: .9;
-    }
+            color: white;
 
-    50% {
-        opacity: 1;
-    }
-}
+            font-size: 22px;
 
+            text-shadow:
 
-/* =========================
-   点击播放按钮
-========================= */
+                0 0 6px #ffffff,
 
-#playButton {
+                0 0 15px #9eeaff,
 
-    position: fixed;
+                0 0 30px #55d5ff;
 
-    left: 50%;
-    bottom: 9%;
+            animation:
+                starTwinkle 2s ease-in-out infinite;
+        }
 
-    transform: translateX(-50%);
 
-    z-index: 10;
+        .star:nth-child(1) {
+            top: 14%;
+            left: 15%;
+            font-size: 25px;
+        }
 
-    padding: 16px 35px;
+        .star:nth-child(2) {
+            top: 23%;
+            right: 15%;
+            font-size: 30px;
+            animation-delay: .4s;
+        }
 
-    border: 2px solid rgba(255,255,255,.9);
+        .star:nth-child(3) {
+            top: 38%;
+            left: 8%;
+            font-size: 18px;
+            animation-delay: .8s;
+        }
 
-    border-radius: 50px;
+        .star:nth-child(4) {
+            top: 45%;
+            right: 10%;
+            font-size: 25px;
+            animation-delay: 1.2s;
+        }
 
-    background:
-        rgba(225,248,255,.92);
+        .star:nth-child(5) {
+            top: 65%;
+            left: 18%;
+            font-size: 20px;
+            animation-delay: .6s;
+        }
 
-    color: #357bb8;
+        .star:nth-child(6) {
+            top: 72%;
+            right: 18%;
+            font-size: 28px;
+            animation-delay: 1.5s;
+        }
 
-    font-size: 19px;
 
-    font-weight: bold;
+        @keyframes starTwinkle {
 
-    letter-spacing: 3px;
+            0%,
+            100% {
 
-    box-shadow:
-        0 0 10px white,
-        0 0 25px #9ce8ff,
-        0 0 45px #55d0ff;
+                opacity: 0.25;
 
-    transition:
-        transform .25s ease,
-        opacity .8s ease;
-}
+                transform:
+                    scale(.7)
+                    rotate(0deg);
+            }
 
+            50% {
 
-#playButton:active {
+                opacity: 1;
 
-    transform:
-        translateX(-50%)
-        scale(.92);
-}
+                transform:
+                    scale(1.5)
+                    rotate(45deg);
+            }
+        }
 
 
-/* =========================
-   点击之后隐藏
-========================= */
+        /* =========================
+           播放按钮
+        ========================= */
 
-.hide {
+        #startButton {
 
-    opacity: 0 !important;
+            position: fixed;
 
-    pointer-events: none;
+            left: 50%;
 
-    transform:
-        translateX(-50%)
-        scale(.8) !important;
-}
+            bottom: 40px;
 
+            transform: translateX(-50%);
 
-#birthdayMessage.hide {
+            z-index: 10;
 
-    transform:
-        translateX(-50%)
-        scale(.8) !important;
-}
+            padding: 14px 30px;
 
+            border: 2px solid rgba(255,255,255,.8);
 
-/* =========================
-   手机屏幕
-========================= */
+            border-radius: 30px;
 
-@media screen and (max-width:600px) {
+            background:
+                rgba(225,248,255,.92);
 
-    #birthdayMessage {
+            color: #397eb5;
 
-        top: 18%;
-    }
+            font-size: 18px;
 
-    #playButton {
+            font-weight: bold;
 
-        bottom: 8%;
+            letter-spacing: 3px;
 
-        padding:
-            14px 28px;
+            box-shadow:
 
-        font-size: 18px;
-    }
-}
+                0 0 10px #ffffff,
 
-</style>
+                0 0 25px #9eeaff,
+
+                0 0 45px #55d5ff;
+
+            transition:
+
+                opacity 1s ease,
+
+                transform 1s ease;
+        }
+
+
+        /* =========================
+           点击后隐藏
+        ========================= */
+
+        .hide {
+
+            opacity: 0 !important;
+
+            transform:
+                translateX(-50%)
+                scale(.8) !important;
+
+            pointer-events: none;
+        }
+
+
+        /* =========================
+           横屏保持原来的视频方式
+        ========================= */
+
+        @media (orientation: landscape) {
+
+            .video-background {
+
+                width: 100vw;
+
+                height: 100vh;
+
+                transform:
+                    translate(-50%, -50%);
+
+                object-fit: cover;
+            }
+        }
+
+
+        /* =========================
+           手机竖屏
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            #birthdayMessage {
+
+                top: 18%;
+            }
+
+            .name {
+
+                font-size: 58px;
+
+                letter-spacing: 9px;
+            }
+
+            .birthday {
+
+                font-size: 38px;
+
+                letter-spacing: 6px;
+            }
+
+            #startButton {
+
+                bottom: 35px;
+
+                font-size: 17px;
+
+                padding:
+                    13px 26px;
+            }
+        }
+
+    </style>
 </head>
 
 
 <body>
 
 
-<!-- =========================
-     视频
-========================= -->
+    <!-- =========================
+         视频：完全保留原来的设置
+    ========================= -->
 
-<video
-    id="backgroundVideo"
-    class="video-background"
-    autoplay
-    muted
-    loop
-    playsinline
-    webkit-playsinline
-    x5-playsinline
-    preload="auto">
+    <video
+        id="birthdayVideo"
+        class="video-background"
+        autoplay
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        x5-playsinline
+        preload="auto">
 
-    <source
-        src="birthday.mp4"
-        type="video/mp4">
+        <source
+            src="birthday.mp4"
+            type="video/mp4">
 
-</video>
-
-
-<!-- 梦幻遮罩 -->
-
-<div class="overlay"></div>
+    </video>
 
 
-<!-- =========================
-     星光
-========================= -->
+    <!-- =========================
+         音乐：保持原来的音乐
+    ========================= -->
 
-<div class="stars">
+    <audio
+        id="music1"
+        loop
+        preload="auto">
 
-    <div class="star">✦</div>
+        <source
+            src="https://music.163.com/song/media/outer/url?id=1963443271.mp3"
+            type="audio/mpeg">
 
-    <div class="star">✦</div>
-
-    <div class="star">✧</div>
-
-    <div class="star">✦</div>
-
-    <div class="star">✧</div>
-
-    <div class="star">✦</div>
-
-    <div class="star">✧</div>
-
-    <div class="star">✦</div>
-
-</div>
+    </audio>
 
 
-<!-- =========================
-     生日文字
-========================= -->
+    <!-- =========================
+         星光
+    ========================= -->
 
-<div id="birthdayMessage">
+    <div class="stars">
 
-    <div class="name">
-        帆帆
+        <div class="star">✦</div>
+
+        <div class="star">✦</div>
+
+        <div class="star">✧</div>
+
+        <div class="star">✦</div>
+
+        <div class="star">✧</div>
+
+        <div class="star">✦</div>
+
     </div>
 
-    <div class="birthday">
-        生日快乐
+
+    <!-- =========================
+         生日文字
+    ========================= -->
+
+    <div id="birthdayMessage">
+
+        <div class="name">
+            帆帆
+        </div>
+
+        <div class="birthday">
+            生日快乐
+        </div>
+
     </div>
 
-</div>
+
+    <!-- =========================
+         播放按钮
+    ========================= -->
+
+    <button id="startButton">
+        ✨ 点击播放 ✨
+    </button>
 
 
-<!-- =========================
-     音乐
-========================= -->
+    <script>
 
-<audio
-    id="music1"
-    loop
-    preload="auto">
+        (function () {
 
-    <source
-        src="https://music.163.com/song/media/outer/url?id=1963443271.mp3"
-        type="audio/mpeg">
+            var video =
+                document.getElementById(
+                    'birthdayVideo'
+                );
 
-</audio>
+            var audio =
+                document.getElementById(
+                    'music1'
+                );
 
+            var button =
+                document.getElementById(
+                    'startButton'
+                );
 
-<!-- =========================
-     播放按钮
-========================= -->
-
-<button id="playButton">
-
-    ✨ 点击播放 ✨
-
-</button>
+            var message =
+                document.getElementById(
+                    'birthdayMessage'
+                );
 
 
-<script>
+            /* 点击播放 */
 
-/* =========================
-   获取元素
-========================= */
+            function startMedia() {
 
-const video =
-    document.getElementById(
-        "backgroundVideo"
-    );
+                /* 视频保持原来的播放方式 */
 
-const music =
-    document.getElementById(
-        "music1"
-    );
+                video.muted = true;
 
-const button =
-    document.getElementById(
-        "playButton"
-    );
+                var vp =
+                    video.play();
 
-const message =
-    document.getElementById(
-        "birthdayMessage"
-    );
+                if (
+                    vp &&
+                    vp.catch
+                ) {
+
+                    vp.catch(
+                        function () {}
+                    );
+                }
 
 
-/* =========================
-   页面加载后尝试播放视频
-========================= */
+                /* 播放音乐 */
 
-window.addEventListener(
-    "load",
-    function () {
+                var ap =
+                    audio.play();
 
-        video.play().catch(
-            function (error) {
+                if (
+                    ap &&
+                    ap.catch
+                ) {
 
-                console.log(
-                    "视频等待用户操作：",
-                    error
+                    ap.catch(
+                        function () {}
+                    );
+                }
+
+
+                /* 隐藏帆帆和生日快乐 */
+
+                message.classList.add(
+                    'hide'
+                );
+
+
+                /* 隐藏按钮 */
+
+                button.classList.add(
+                    'hide'
                 );
 
             }
-        );
-
-    }
-);
 
 
-/* =========================
-   点击播放
-========================= */
+            /* 点击按钮 */
 
-button.addEventListener(
-    "click",
-    function () {
+            button.addEventListener(
+                'click',
+                startMedia
+            );
 
-        /* 播放视频 */
 
-        video.play().catch(
-            function (error) {
+            /* 自动尝试播放视频 */
 
-                console.log(
-                    "视频播放失败：",
-                    error
+            var p =
+                video.play();
+
+            if (
+                p &&
+                p.catch
+            ) {
+
+                p.catch(
+                    function () {
+
+                        button.style.display =
+                            'block';
+
+                    }
                 );
-
             }
-        );
 
+        })();
 
-        /* 播放音乐 */
-
-        music.play().catch(
-            function (error) {
-
-                console.log(
-                    "音乐播放失败：",
-                    error
-                );
-
-            }
-        );
-
-
-        /* 隐藏生日文字 */
-
-        message.classList.add(
-            "hide"
-        );
-
-
-        /* 隐藏按钮 */
-
-        button.classList.add(
-            "hide"
-        );
-
-    }
-);
-
-</script>
+    </script>
 
 </body>
+
 </html>
