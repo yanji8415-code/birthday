@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <title>马慕帆生日快乐</title>
+
+    <style>
+
+        /* =========================
+           页面基础
+        ========================= */
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+
+
+        /* =========================
+           背景视频
+        ========================= */
+        .video-background {
+            position: fixed;
+
+            top: 50%;
+            left: 50%;
+
+            width: 100vh;
+            height: 100vw;
+
+            transform:
+                translate(-50%, -50%)
+                rotate(90deg);
+
+            transform-origin: center center;
+
+            object-fit: cover;
+
+            z-index: 0;
+
+            background: #000;
+        }
+
+
+        /* =========================
+           横屏状态
+        ========================= */
+        @media (orientation: landscape) {
+
+            .video-background {
+
+                width: 100vw;
+                height: 100vh;
+
+                transform:
+                    translate(-50%, -50%);
+
+                object-fit: cover;
+            }
+        }
+
+
+        /* =========================
+           生日祝福文字
+        ========================= */
+        #birthdayMessage {
+
+            position: fixed;
+
+            top: 32%;
+            left: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            z-index: 10;
+
+            text-align: center;
+
+            pointer-events: none;
+
+            transition:
+                opacity 1.2s ease,
+                transform 1.2s ease;
+        }
+
+
+        /* 马慕帆 */
+        .name {
+
+            font-family:
+                "STKaiti",
+                "KaiTi",
+                "华文楷体",
+                cursive;
+
+            font-size: 46px;
+
+            font-style: italic;
+
+            font-weight: bold;
+
+            color: #bdeeff;
+
+            white-space: nowrap;
+
+            text-shadow:
+                0 0 5px rgba(190, 235, 255, 0.9),
+                0 0 12px rgba(130, 215, 255, 0.8),
+                0 0 25px rgba(100, 200, 255, 0.6);
+
+            animation:
+                textGlow 2.5s ease-in-out infinite;
+        }
+
+
+        /* 生日快乐 */
+        .birthday {
+
+            margin-top: 12px;
+
+            font-family:
+                "STKaiti",
+                "KaiTi",
+                "华文楷体",
+                cursive;
+
+            font-size: 38px;
+
+            font-style: italic;
+
+            font-weight: bold;
+
+            color: #bdeeff;
+
+            white-space: nowrap;
+
+            text-shadow:
+                0 0 5px rgba(190, 235, 255, 0.9),
+                0 0 12px rgba(130, 215, 255, 0.8),
+                0 0 25px rgba(100, 200, 255, 0.6);
+
+            animation:
+                textGlow 2.5s ease-in-out infinite;
+
+            animation-delay: 0.4s;
+        }
+
+
+        /* =========================
+           文字呼吸发光
+        ========================= */
+        @keyframes textGlow {
+
+            0% {
+                opacity: 0.78;
+
+                text-shadow:
+                    0 0 4px rgba(190,235,255,0.7),
+                    0 0 10px rgba(130,215,255,0.5),
+                    0 0 18px rgba(100,200,255,0.35);
+            }
+
+            50% {
+                opacity: 1;
+
+                text-shadow:
+                    0 0 8px rgba(220,245,255,1),
+                    0 0 18px rgba(130,220,255,0.95),
+                    0 0 35px rgba(100,200,255,0.8);
+            }
+
+            100% {
+                opacity: 0.78;
+
+                text-shadow:
+                    0 0 4px rgba(190,235,255,0.7),
+                    0 0 10px rgba(130,215,255,0.5),
+                    0 0 18px rgba(100,200,255,0.35);
+            }
+        }
+
+
+        /* =========================
+           星光
+        ========================= */
+        .star {
+
+            position: fixed;
+
+            width: 4px;
+            height: 4px;
+
+            border-radius: 50%;
+
+            background: #e8f9ff;
+
+            box-shadow:
+                0 0 5px #ffffff,
+                0 0 12px #9ee7ff,
+                0 0 20px #79d8ff;
+
+            z-index: 9;
+
+            pointer-events: none;
+
+            animation:
+                starTwinkle 2s ease-in-out infinite;
+        }
+
+
+        @keyframes starTwinkle {
+
+            0% {
+                opacity: 0.1;
+                transform: scale(0.5);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+
+            100% {
+                opacity: 0.1;
+                transform: scale(0.5);
+            }
+        }
+
+
+        /* =========================
+           播放按钮
+        ========================= */
+        #startButton {
+
+            position: fixed;
+
+            left: 50%;
+            bottom: 40px;
+
+            transform:
+                translateX(-50%);
+
+            z-index: 20;
+
+            padding:
+                12px 30px;
+
+            border: none;
+
+            border-radius: 30px;
+
+            background:
+                rgba(255, 255, 255, 0.88);
+
+            color: #4d9fc5;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            box-shadow:
+                0 0 10px rgba(160, 225, 255, 0.8),
+                0 0 25px rgba(120, 210, 255, 0.45);
+
+            transition:
+                opacity 1s ease,
+                transform 1s ease;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           点击后淡出
+        ========================= */
+        .hide {
+
+            opacity: 0 !important;
+
+            transform:
+                translate(-50%, -50%)
+                scale(1.15);
+
+            pointer-events: none;
+        }
+
+
+        #startButton.hide {
+
+            transform:
+                translateX(-50%)
+                scale(1.15);
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         背景视频
+    ========================= -->
+
+    <video
+        id="birthdayVideo"
+        class="video-background"
+        autoplay
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        x5-playsinline
+        preload="auto">
+
+        <source
+            src="birthday.mp4"
+            type="video/mp4">
+
+    </video>
+
+
+    <!-- =========================
+         生日祝福
+    ========================= -->
+
+    <div id="birthdayMessage">
+
+        <div class="name">
+            马慕帆
+        </div>
+
+        <div class="birthday">
+            生日快乐
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         星光
+    ========================= -->
+
+    <div class="star" style="top:18%;left:18%;"></div>
+
+    <div class="star"
+         style="top:25%;left:78%;animation-delay:.6s;">
+    </div>
+
+    <div class="star"
+         style="top:55%;left:12%;animation-delay:1s;">
+    </div>
+
+    <div class="star"
+         style="top:68%;left:85%;animation-delay:1.4s;">
+    </div>
+
+    <div class="star"
+         style="top:42%;left:88%;animation-delay:.3s;">
+    </div>
+
+    <div class="star"
+         style="top:75%;left:28%;animation-delay:1.7s;">
+    </div>
+
+    <div class="star"
+         style="top:15%;left:55%;animation-delay:.9s;">
+    </div>
+
+
+    <!-- =========================
+         音乐
+    ========================= -->
+
+    <audio
+        id="music1"
+        loop
+        preload="auto">
+
+        <source
+            src="https://music.163.com/song/media/outer/url?id=1963443271.mp3"
+            type="audio/mpeg">
+
+    </audio>
+
+
+    <!-- =========================
+         播放按钮
+    ========================= -->
+
+    <button id="startButton">
+        ✨ 点击播放 ✨
+    </button>
+
+
+    <!-- =========================
+         JavaScript
+    ========================= -->
+
+    <script>
+
+        (function () {
+
+            var video =
+                document.getElementById(
+                    "birthdayVideo"
+                );
+
+            var audio =
+                document.getElementById(
+                    "music1"
+                );
+
+            var button =
+                document.getElementById(
+                    "startButton"
+                );
+
+            var message =
+                document.getElementById(
+                    "birthdayMessage"
+                );
+
+
+            /* 播放视频和音乐 */
+            function startMedia() {
+
+                video.muted = true;
+
+
+                /* 播放视频 */
+
+                var videoPromise =
+                    video.play();
+
+                if (
+                    videoPromise &&
+                    videoPromise.catch
+                ) {
+
+                    videoPromise.catch(
+                        function () {}
+                    );
+
+                }
+
+
+                /* 播放音乐 */
+
+                var audioPromise =
+                    audio.play();
+
+                if (
+                    audioPromise &&
+                    audioPromise.catch
+                ) {
+
+                    audioPromise.catch(
+                        function () {}
+                    );
+
+                }
+
+
+                /* =====================
+                   点击后隐藏文字
+                   ===================== */
+
+                message.classList.add(
+                    "hide"
+                );
+
+
+                /* 隐藏播放按钮 */
+
+                button.classList.add(
+                    "hide"
+                );
+
+            }
+
+
+            /* 点击播放按钮 */
+
+            button.addEventListener(
+                "click",
+                startMedia
+            );
+
+
+            /* 尝试自动播放视频 */
+
+            var p =
+                video.play();
+
+            if (
+                p &&
+                p.catch
+            ) {
+
+                p.catch(
+                    function () {
+
+                        button.style.display =
+                            "block";
+
+                    }
+                );
+
+            }
+
+        })();
+
+    </script>
+
+
+</body>
+</html>
